@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "897276139516",
+    "firebase_url": "https://personal-183702.firebaseio.com",
+    "project_id": "personal-183702",
+    "storage_bucket": "personal-183702.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897276139516:android:2f4f63873c12fd05",
+        "android_client_info": {
+          "package_name": "com.arcu.ignite1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897276139516-bb8vkemeeetn6qt45k25p4h2gm9p76ht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAINxAlIYKgJ9soug-SSn5wIBMIEykvI4Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
