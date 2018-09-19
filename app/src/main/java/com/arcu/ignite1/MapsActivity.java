@@ -56,13 +56,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        fetchData();
+        fetchLocations(database.getReference("locations"));
     }
 
-    private void fetchData() {
+    private void fetchLocations(DatabaseReference databaseReference) {
 
-        final DatabaseReference myRef = database.getReference("locations");
-        myRef.addChildEventListener(new ChildEventListener() {
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 

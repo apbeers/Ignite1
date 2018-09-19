@@ -4,8 +4,8 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class Location {
 
-    public double latitude;
-    public double longitude;
+    public Double latitude;
+    public Double longitude;
     public String title;
     public String snippet;
 
@@ -20,7 +20,10 @@ public class Location {
     }
 
     public double getLatitude() {
-        return latitude;
+        if (latitude != null) {
+            return latitude;
+        }
+        return 0.0;
     }
 
     public void setLatitude(double latitude) {
@@ -28,7 +31,12 @@ public class Location {
     }
 
     public double getLongitude() {
-        return longitude;
+
+        if (longitude != null) {
+            return longitude;
+        }
+
+        return 0.0;
     }
 
     public void setLongitude(double longitude) {
@@ -36,7 +44,12 @@ public class Location {
     }
 
     public String getTitle() {
-        return title;
+
+        if (title != null) {
+            return title;
+        }
+
+        return "No Title Set";
     }
 
     public void setTitle(String title) {
@@ -44,7 +57,10 @@ public class Location {
     }
 
     public String getSnippet() {
-        return snippet;
+        if (snippet != null) {
+            return snippet;
+        }
+        return "No SNippet Set";
     }
 
     public void setSnippet(String snippet) {
