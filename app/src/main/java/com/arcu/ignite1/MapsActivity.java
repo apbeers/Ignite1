@@ -1,9 +1,9 @@
 package com.arcu.ignite1;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,19 +11,18 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import java.util.UUID;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private String TAG = "Ignite 1";
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
@@ -56,13 +55,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        fetchData();
+        fetchLocations(database.getReference("locations"));
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                addLocation(database.getReference("locations"), new Location(latLng.latitude, latLng.longitude, "Add By Tapping Map", "Hello World"));
+            }
+        });
     }
 
-    private void fetchData() {
+    private void addLocation(DatabaseReference databaseReference, Location location) {
 
-        final DatabaseReference myRef = database.getReference("locations");
-        myRef.addChildEventListener(new ChildEventListener() {
+        databaseReference.child(UUID.randomUUID().toString()).setValue(location);
+    }
+
+    private void fetchLocations(DatabaseReference databaseReference) {
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
@@ -98,7 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.d("Database Error", databaseError.toString());
             }
         });
     }
