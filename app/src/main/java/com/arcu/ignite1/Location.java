@@ -19,7 +19,8 @@ public class Location {
         this.snippet = snippet;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
+
         if (latitude != null) {
             return latitude;
         }
@@ -30,7 +31,7 @@ public class Location {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
 
         if (longitude != null) {
             return longitude;
